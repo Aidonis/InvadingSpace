@@ -36,6 +36,10 @@ public:
 
 	bool isActive;
 
+	void SetScoreValue(int a_scoreValue);
+	int GetScoreValue();
+
+
 	Enemy();
 	~Enemy();
 
@@ -46,6 +50,7 @@ private:
 	float height;
 	float x;
 	float y;
+	unsigned int scoreValue;
 };
 
 #endif //_ENEMY_H_

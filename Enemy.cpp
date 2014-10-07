@@ -54,6 +54,13 @@ float Enemy::GetY(){
 	return y;
 }
 
+void Enemy::SetScoreValue(int a_scoreValue){
+	scoreValue = a_scoreValue;
+}
+int Enemy::GetScoreValue(){
+	return scoreValue;
+}
+
 void Enemy::SetSize(float a_width, float a_height){
 	width = a_width;
 	height = a_height;

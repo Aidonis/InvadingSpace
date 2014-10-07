@@ -70,7 +70,6 @@ int main(int argc, char* argv[])
 	player1.SetMovementExtremes(0, SCREEN_WIDTH);
 	player1.SetSpeed(200.f);
 	player1.SetShootKey(265);
-	player1.SetScore(0);
 	bulletTextureID = CreateSprite("./images/laserGreen04.png", 5, 20, true);
 
 	//Initialize font
@@ -188,6 +187,7 @@ void UpdateGameState(float a_deltaTime){
 				if (CheckCollision(player1.bullets[i].x, player1.bullets[i].y, aliens[j].GetX(), aliens[j].GetY(), 30.0f) && aliens[j].isActive){
 					aliens[j].isActive = false;
 					player1.bullets[i].isActive= false;
+					player1.AddScore(aliens[i].GetScoreValue());
 					activeAliens--;
 				}
 			}
@@ -207,6 +207,7 @@ void EnemiesLoad(){
 		//Initialize Sprite
 		aliens[i].SetSize(player1.GetWidth(), player1.GetHeight());
 		aliens[i].SetSpriteID(CreateSprite("./images/invaders/enemyBlack3.png", player1.GetWidth(), player1.GetHeight(), true));
+		aliens[i].SetScoreValue(20);
 
 		if (enemyX > SCREEN_WIDTH * .8f){
 			enemyX = SCREEN_WIDTH * .2f;
@@ -241,7 +242,7 @@ void DrawEnemies(){
 void DrawUI(){
 	//Draw UI elements
 	DrawString("Score < 1 >", SCREEN_WIDTH * 0.1f, SCREEN_HEIGHT - 2);
-	DrawString(scorePlayer1, SCREEN_WIDTH * 0.15f, SCREEN_HEIGHT - 35);
+	DrawString(player1.GetScoreAsString(), SCREEN_WIDTH * 0.15f, SCREEN_HEIGHT - 35);
 	DrawString("High-Score", SCREEN_WIDTH * 0.4f, SCREEN_HEIGHT - 2);
 	DrawString(highScore, SCREEN_WIDTH * 0.45f, SCREEN_HEIGHT - 35);
 	DrawString("Score < 2 >", SCREEN_WIDTH * 0.7f, SCREEN_HEIGHT - 2);

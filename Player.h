@@ -5,6 +5,7 @@
 #include "AIE.h"
 #include "Entity.h"
 #include "Bullet.h"
+#include <string>
 
 const int MAX_BULLETS = 20;
 
@@ -27,8 +28,9 @@ public:
 	void SetSpeed(float speed);
 	float GetSpeed();
 
-	void SetScore(int a_score);
+	void AddScore(unsigned int a_scoreValue);
 	int GetScore();
+	char* GetScoreAsString();
 
 	void Shoot(unsigned int a_textureID, float a_deltaTime);
 
@@ -43,6 +45,7 @@ private:
 
 	float speed;
 	int score;
+	char scoreAsString[6];
 
 	unsigned int moveLeftKey;
 	unsigned int moveRightKey;

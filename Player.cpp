@@ -8,15 +8,23 @@ Player::Player()
 	currentReloadBulletTime = 0.0f;
 	maxBulletReloadTime = .5f;
 
+	AddScore(0);
+
 }
 
 //
-void Player::SetScore(int a_score){
-	score = a_score;
+void Player::AddScore(unsigned int a_scoreValue){
+	score += a_scoreValue;
+	char buff[6];
+	sprintf(buff, "%05d", score);
+	strcpy(scoreAsString, buff);
 }
 
 int Player::GetScore(){
 	return score;
+}
+char* Player::GetScoreAsString(){
+	return scoreAsString;
 }
 void Player::SetSpeed(float speed){
 	this->speed = speed;
