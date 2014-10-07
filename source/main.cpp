@@ -42,15 +42,15 @@ unsigned int playerLives2;
 int activeAliens = TOTAL_ALIENS;
 
 //Font
-const char* invadersFont = "./fonts/invaders.fnt";
+const char* INVADERS_FONT = "./fonts/invaders.fnt";
 
 //UI variables
-char scorePlayer1[10] = "00000";
-char scorePlayer2[10] = "00000";
-char highScore[10] = "00000";
-char totalCredits[10] = "00";
-char totalLives[2] = "2";
-char* insertCoins = "Insert_Coins";
+char* P1_SCORE = "00000";
+char* P2_SCORE = "00000";
+char* HIGH_SCORE = "00000";
+char* TOTAL_CREDITS = "00";
+char* TOTAL_LIVES = "2";
+char* INSERT_COINS = "Insert_Coins";
 
 enum GAMESTATES{
 	MAIN_MENU,
@@ -76,13 +76,13 @@ int main(int argc, char* argv[])
 	player->SetSpeed(200.f);
 	player->SetShootKey(265);
 
-	//add player onject to the dynamic array
+	//add player object to the dynamic array
 	gameObjects.push_back(player);
 
 	bulletTextureID = CreateSprite("./images/laserGreen04.png", 5, 20, true);
 
 	//Initialize font
-	AddFont(invadersFont);
+	AddFont(INVADERS_FONT);
 
 	//Initialize UI sprites
 	playerLives1 = CreateSprite("./images/playerShip1_green.png", player->GetWidth() * 0.5f, player->GetHeight() * 0.5f, true);
@@ -101,7 +101,7 @@ int main(int argc, char* argv[])
 
 		ClearScreen();
 		float deltaT = GetDeltaTime();
-		SetFont(invadersFont);
+		SetFont(INVADERS_FONT);
 
 		switch (eCurrentState){
 
@@ -143,8 +143,8 @@ int main(int argc, char* argv[])
 
 void UpdateMainMenu(){
 	DrawSprite(arcadeMarquee);
-	DrawString(insertCoins, SCREEN_WIDTH * 0.37f, SCREEN_HEIGHT * 0.5f);
-	DrawString(totalCredits, SCREEN_WIDTH * 0.25f, SCREEN_HEIGHT * 0.4f);
+	DrawString(INSERT_COINS, SCREEN_WIDTH * 0.37f, SCREEN_HEIGHT * 0.5f);
+	DrawString(TOTAL_CREDITS, SCREEN_WIDTH * 0.25f, SCREEN_HEIGHT * 0.4f);
 }
 
 void UpdateGameState(float a_deltaTime){
@@ -168,7 +168,7 @@ void UpdateGameState(float a_deltaTime){
 			EnemyLogic(dynamic_cast<Enemy*>(object), down);
 		}
 
-		//Update anddraw objects
+		//Update and draw objects
 		object->Update(a_deltaTime);
 		object->Draw();
 	}
@@ -182,55 +182,6 @@ void UpdateGameState(float a_deltaTime){
 			}
 		}
 	}
-	//for (int i = 0; i < TOTAL_ALIENS; i++){
-	//	//Collision Right
-	//	if (aliens[i].isActive && aliens[i].GetX() > SCREEN_WIDTH * .9f){
-	//		aliens[i].SetX(SCREEN_WIDTH * 0.9f);
-	//		aliensDirection = -1;
-	//		down = true;
-	//		break;
-	//	}
-	//	
-	//	//Collision Left
-	//	else if (aliens[i].isActive && aliens[i].GetX() < SCREEN_WIDTH * .1f){
-	//		aliens[i].SetX(SCREEN_WIDTH * 0.1f);
-	//		aliensDirection = 1;
-	//		down = true;
-	//		break;
-	//	}
-	//}
-
-	//if (down){
-	//	for (int i = 0; i < TOTAL_ALIENS; i++){
-	//		aliens[i].SetY(aliens[i].GetY() - .05f * SCREEN_HEIGHT);
-	//	}
-	//}
-
-	//for (int i = 0; i < TOTAL_ALIENS; i++){
-	//	aliens[i].SetDirection(aliensDirection);
-	//	aliens[i].SetSpeed(enemySpeed / activeAliens);
-	//	aliens[i].Update(a_deltaTime);
-	//	aliens[i].Draw();
-	//}
-
-	//
-	////Fire the weapons!
-
-
-	////Bullet Collision
-	//for (int i = 0; i < MAX_BULLETS; i++){
-	//	if (player->bullets[i].isActive){
-	//		for (int j = 0; j < TOTAL_ALIENS; j++){
-	//			if (CheckCollision(player->bullets[i].x, player->bullets[i].y, aliens[j].GetX(), aliens[j].GetY(), 30.0f) && aliens[j].isActive){
-	//				aliens[j].isActive = false;
-	//				player->bullets[i].isActive= false;
-	//				player->AddScore(aliens[i].GetScoreValue());
-	//				activeAliens--;
-	//			}
-	//		}
-	//	}
-	//}
-
 }
 
 void EnemiesLoad(){
@@ -269,11 +220,11 @@ void DrawUI(){
 	DrawString("Score < 1 >", SCREEN_WIDTH * 0.1f, SCREEN_HEIGHT - 2);
 	DrawString(player->GetScoreAsString(), SCREEN_WIDTH * 0.15f, SCREEN_HEIGHT - 35);
 	DrawString("High-Score", SCREEN_WIDTH * 0.4f, SCREEN_HEIGHT - 2);
-	DrawString(highScore, SCREEN_WIDTH * 0.45f, SCREEN_HEIGHT - 35);
+	DrawString(HIGH_SCORE, SCREEN_WIDTH * 0.45f, SCREEN_HEIGHT - 35);
 	DrawString("Score < 2 >", SCREEN_WIDTH * 0.7f, SCREEN_HEIGHT - 2);
-	DrawString(scorePlayer2, SCREEN_WIDTH * 0.75f, SCREEN_HEIGHT - 35);
+	DrawString(P2_SCORE, SCREEN_WIDTH * 0.75f, SCREEN_HEIGHT - 35);
 	DrawString("Credit(s)", SCREEN_WIDTH * 0.7f, SCREEN_HEIGHT - 700);
-	DrawString(totalCredits, SCREEN_WIDTH * 0.92f, SCREEN_HEIGHT - 700);
+	DrawString(TOTAL_CREDITS, SCREEN_WIDTH * 0.92f, SCREEN_HEIGHT - 700);
 	DrawString("2", SCREEN_WIDTH * 0.05f, SCREEN_HEIGHT - 700);
 	DrawLine(0, 100, 672, 100, SColour(255, 255, 255, 255));
 	DrawSprite(playerLives1);

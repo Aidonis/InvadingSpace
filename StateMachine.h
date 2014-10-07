@@ -11,7 +11,7 @@ public:
 	StateMachine();
 	~StateMachine();
 
-	void PushSate(BaseState* a_gameState);
+	void PushState(BaseState* a_gameState);
 	BaseState* PopState();
 	BaseState* SwitchState(BaseState* a_gameState);
 
