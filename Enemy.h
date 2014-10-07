@@ -3,9 +3,11 @@
 #ifndef _ENEMY_H_
 #define _ENEMY_H_
 #include "Window.h"
+#include "Entity.h"
 #include "AIE.h"
 
-class Enemy
+
+class Enemy : public Entity
 {
 public:
 
@@ -13,44 +15,28 @@ public:
 	void SetPosition(float a_x, float a_y);
 	bool Collide(int a_Direction);
 
-	void SetSpriteID(unsigned int spriteID);
-	unsigned int GetSpriteID();
+	virtual void Update(float a_deltaTime);
+	virtual void Draw();
 
-	void SetWidth(float width);
-	void SetHeight(float height);
-
-	float GetWidth();
-	float GetHeight();
-	
-	void SetX(float x);
-	void SetY(float y);
-
-	float GetX();
-	float GetY();
+	bool isActive;
 
 	void SetSpeed(float speed);
 	float GetSpeed();
 
-	void Move(float a_deltaTime, int a_direction, float a_speed);
-	void Draw();
-
-	bool isActive;
-
 	void SetScoreValue(int a_scoreValue);
 	int GetScoreValue();
+
+	void SetDirection(int a_direction);
+	int GetDirection();
 
 
 	Enemy();
 	~Enemy();
 
 private:
-	unsigned int spriteID;
 	float speed;
-	float width;
-	float height;
-	float x;
-	float y;
 	unsigned int scoreValue;
+	int direction;
 };
 
 #endif //_ENEMY_H_

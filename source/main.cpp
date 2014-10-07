@@ -155,6 +155,7 @@ void UpdateGameState(float a_deltaTime){
 			down = true;
 			break;
 		}
+		
 		//Collision Left
 		else if (aliens[i].isActive && aliens[i].GetX() < SCREEN_WIDTH * .1f){
 			aliens[i].SetX(SCREEN_WIDTH * 0.1f);
@@ -170,8 +171,13 @@ void UpdateGameState(float a_deltaTime){
 		}
 	}
 
-	MoveEnemies(enemiesDirection, a_deltaTime, enemySpeed);
-	DrawEnemies();
+	for (int i = 0; i < TOTAL_ALIENS; i++){
+		aliens[i].SetDirection(enemiesDirection);
+		aliens[i].SetSpeed(enemySpeed / activeAliens);
+		aliens[i].Update(a_deltaTime);
+		aliens[i].Draw();
+	}
+
 	
 	//Fire the weapons!
 	player1.Shoot(bulletTextureID, a_deltaTime);
@@ -208,6 +214,7 @@ void EnemiesLoad(){
 		aliens[i].SetSize(player1.GetWidth(), player1.GetHeight());
 		aliens[i].SetSpriteID(CreateSprite("./images/invaders/enemyBlack3.png", player1.GetWidth(), player1.GetHeight(), true));
 		aliens[i].SetScoreValue(20);
+		aliens[i].SetDirection(enemiesDirection);
 
 		if (enemyX > SCREEN_WIDTH * .8f){
 			enemyX = SCREEN_WIDTH * .2f;
@@ -221,23 +228,6 @@ void EnemiesLoad(){
 		enemyX += .12*SCREEN_WIDTH;
 	}
 }
-
-void MoveEnemies(int a_direction, float a_deltaTime, float a_speed){
-
-	for (int i = 0; i < TOTAL_ALIENS; i++){
-		aliens[i].Move(a_deltaTime, a_direction, a_speed / activeAliens);
-	}
-}
-
-void DrawEnemies(){
-	for (int i = 0; i < TOTAL_ALIENS; i++){
-		if (aliens[i].isActive){
-			aliens[i].Draw();
-		}
-	}
-}
-
-
 
 void DrawUI(){
 	//Draw UI elements
