@@ -3,6 +3,12 @@
 
 Bullet::Bullet()
 {
+	x = 0;
+	y = 0;
+	velocityX = 0;
+	velocityY = 0;
+	textureID = 0;
+	isActive = false;
 }
 
 void Bullet::Draw(){

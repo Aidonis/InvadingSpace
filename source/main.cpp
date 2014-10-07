@@ -241,7 +241,7 @@ void EnemiesLoad(){
 
 	for (int i = 0; i < TOTAL_ALIENS; i++){
 
-		Enemy* aliens;
+		Enemy* aliens = new Enemy();
 
 		//Initialize Sprite
 		aliens->SetSize(player->GetWidth(), player->GetHeight());
@@ -298,14 +298,14 @@ void PlayerLogic(Player* a_player, float a_deltaTime){
 		player->bullets[i].Draw();
 	}
 
-	for (auto aliens : gameObjects){
-		if (dynamic_cast<Enemy*>(aliens) != 0){
-			Enemy* aliens = dynamic_cast<Enemy*>(aliens);
+	for (auto object : gameObjects){
+		if (dynamic_cast<Enemy*>(object) != 0){
+			Enemy* aliens = dynamic_cast<Enemy*>(object);
 			for (int i = 0; i < MAX_BULLETS; i++){
 				if (CheckCollision(player->bullets[i].x, player->bullets[i].y, aliens->GetX(), aliens->GetY(), 30.0f) && aliens->GetIsActive() && player->bullets[i].isActive){
 					aliens->SetIsActive(false);
 					player->bullets[i].isActive = false;
-					player->AddScore(aliens[i].GetScoreValue());
+					player->AddScore(aliens->GetScoreValue());
 					activeAliens--;
 				}
 			}
