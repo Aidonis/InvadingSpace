@@ -18,8 +18,6 @@ public:
 	virtual void Update(float a_deltaTime);
 	virtual void Draw();
 
-	bool isActive;
-
 	void SetSpeed(float speed);
 	float GetSpeed();
 
@@ -29,6 +27,8 @@ public:
 	void SetDirection(int a_direction);
 	int GetDirection();
 
+	void SetIsActive(bool a_isActive);
+	bool GetIsActive();
 
 	Enemy();
 	~Enemy();
@@ -37,6 +37,7 @@ private:
 	float speed;
 	unsigned int scoreValue;
 	int direction;
+	bool isActive;
 };
 
 #endif //_ENEMY_H_

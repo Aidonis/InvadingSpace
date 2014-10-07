@@ -51,6 +51,14 @@ void Enemy::SetPosition(float a_x, float a_y){
 	y = a_y;
 }
 
+void Enemy::SetIsActive(bool a_isActive){
+	isActive = a_isActive;
+}
+
+bool Enemy::GetIsActive(){
+	return isActive;
+}
+
 Enemy::~Enemy()
 {
 }

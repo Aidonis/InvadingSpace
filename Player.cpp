@@ -8,6 +8,7 @@ Player::Player()
 	currentReloadBulletTime = 0.0f;
 	maxBulletReloadTime = .5f;
 
+	score = 0;
 	AddScore(0);
 
 }
